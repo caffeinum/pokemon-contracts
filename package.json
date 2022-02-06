@@ -1,0 +1,26 @@
+{
+  "name": "pokemon-contracts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@openzeppelin/contracts": "^4.4.2",
+    "truffle": "^5.4.32"
+  },
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.0.3",
+    "bip39": "^3.0.4",
+    "dotenv": "^16.0.0",
+    "solidity-coverage": "^0.7.18",
+    "truffle-contract-size": "^2.0.1",
+    "truffle-plugin-verify": "^0.5.21"
+  }
+}

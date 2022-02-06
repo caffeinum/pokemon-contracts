@@ -1,9 +1,10 @@
+import fs from 'fs';
+import path from 'path';
 import type { VercelApiHandler } from '@vercel/node';
 
 import { allowCors } from '../_cors';
 
-import metadata from '../../_json_metadata/pokemon_metadata.json';
-
+const metadata = JSON.parse(fs.readFileSync(path.join(__dirname, '../../_json_metadata/pokemon_metadata.json'), 'utf8'));
 
 // /api/token/[id]?data=0xhasheddata
 const handler: VercelApiHandler = async (request, response) => {

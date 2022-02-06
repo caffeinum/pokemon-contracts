@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.0.3",
+    "@vercel/node": "^1.12.1",
     "bip39": "^3.0.4",
     "dotenv": "^16.0.0",
     "solidity-coverage": "^0.7.18",

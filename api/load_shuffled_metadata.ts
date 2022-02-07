@@ -7,6 +7,6 @@ import { shuffle } from './shuffle';
 
 const _metadata = JSON.parse(fs.readFileSync(path.join(__dirname, './data/metadata.json'), 'utf8'));
 
-export const metadata = shuffle(_metadata, process.env.shuffle_seed);
+export const metadata = shuffle(_metadata, process.env.SHUFFLE_SEED);
 
 export default metadata;

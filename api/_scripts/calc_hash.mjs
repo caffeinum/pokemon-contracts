@@ -7,7 +7,7 @@ const dataDir = process.argv[2] || './data';
 
 const _metadata = JSON.parse(fs.readFileSync(`${dataDir}/metadata.json`));
 
-const metadata = shuffle(_metadata, process.env.shuffle_seed);
+const metadata = shuffle(_metadata, process.env.SHUFFLE_SEED);
 
 const hashed = metadata.map((pokemon, index) => {
     const hash = hashPokemon(pokemon);

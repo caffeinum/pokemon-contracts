@@ -5,6 +5,6 @@ build
 
 .vercel
 
-data/_metadata.json
+api/data/_metadata.json
 
 

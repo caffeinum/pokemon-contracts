@@ -30,12 +30,13 @@ const handler: VercelApiHandler = async (request, response) => {
         return;
     }
 
-    // if tokenId not pokemon index, return 404
-    if (metadata[tokenId] !== pokemon) {
-        console.log('Token id not pokemon index', tokenId, pokemon, metadata[tokenId]);
-        response.status(404).send(`No pokemon found for token id ${tokenId}`);
-        return;
-    }
+    // // if tokenId not pokemon index, return 404
+    // IGNORE FOR NOW
+    // if (metadata[tokenId] !== pokemon) {
+    //     console.log('Token id not pokemon index', tokenId, pokemon, metadata[tokenId]);
+    //     response.status(404).send(`No pokemon found for token id ${tokenId}`);
+    //     return;
+    // }
 
     return response.status(200).json({
         name: 'Pokemon DAO',

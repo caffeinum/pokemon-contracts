@@ -5,6 +5,8 @@
 
 Free NFT collection of pokemons from OG Pokedex.
 
+The idea is that tokenURI has secret hash – you can see the metadata if you open minted token without the hash, but to get your 
+
 ## How to run?
 
 Download pokedex.json, moves.json and create metadata.json. Put into `_json_metadata` folder.
@@ -22,5 +24,4 @@ Uses `process.env.shuffle_seed`
 node api/_scripts/calc_hash.mjs
 open api/data/_metadata.json
 ```
-
 

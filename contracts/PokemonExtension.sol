@@ -4,6 +4,7 @@ pragma solidity >=0.4.22 <0.9.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 // import "@openzeppelin/contracts/utils/IERC165.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
@@ -26,9 +27,14 @@ interface IMetaverseNFT is IERC721 {
         address to,
         bytes32 data
     ) external payable;
+
+    function contractURI() external view returns (string memory);
+
 }
 
 contract PokemonExtension is Ownable, ERC165, INFTURIExtension {
+    using Strings for uint256;
+
     IMetaverseNFT public immutable nft;
 
     constructor(address _nft) {
@@ -55,7 +61,7 @@ contract PokemonExtension is Ownable, ERC165, INFTURIExtension {
 
     function tokenURI(uint256 tokenId) external view returns (string memory) {
         return string(abi.encodePacked(
-            ERC721(address(nft)).tokenURI(tokenId), "?data=", nft.data(tokenId)
+            nft.contractURI(), tokenId.toString(), "?data=", nft.data(tokenId)
         ));
     }
 

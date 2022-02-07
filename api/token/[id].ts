@@ -25,25 +25,26 @@ const handler: VercelApiHandler = async (request, response) => {
 
     const tokenId = Number(id)
 
-    if (!pokemon) {
+    if (!!data && data !== '0x0000000000000000000000000000000000000000000000000000000000000000' && !pokemon) {
         response.status(404).send(`No pokemon found for hash ${data}`);
         return;
     }
 
     // // if tokenId not pokemon index, return 404
     // IGNORE FOR NOW
-    // if (metadata[tokenId] !== pokemon) {
-    //     console.log('Token id not pokemon index', tokenId, pokemon, metadata[tokenId]);
-    //     response.status(404).send(`No pokemon found for token id ${tokenId}`);
-    //     return;
-    // }
+    if (!!data && data !== '0x0000000000000000000000000000000000000000000000000000000000000000' && metadata[tokenId] !== pokemon) {
+        console.log('Token id not pokemon index', tokenId, pokemon, metadata[tokenId]);
+        response.status(404).send(`No pokemon found for token id ${tokenId}`);
+        return;
+    }
 
     return response.status(200).json({
         name: 'Pokemon DAO',
         image: 'https://raw.githubusercontent.com/vercel/vercel/master/examples/api/public/pokemon.png',
         ...pokemon,
-        attributes: [
-        ]
+        ...metadata[tokenId],
+        // // attributes: [
+        // ]
     });
 };
 

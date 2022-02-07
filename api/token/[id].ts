@@ -1,13 +1,12 @@
-import fs from 'fs';
-import path from 'path';
 import type { VercelApiHandler } from '@vercel/node';
 
-import { allowCors } from '../_cors';
 import { keccak256 } from 'ethereumjs-util';
+import { allowCors } from '../cors';
+
+import metadata from '../load_shuffled_metadata';
 
 export const hashPokemon = pokemon => keccak256(Buffer.from(JSON.stringify(pokemon))).toString('hex');
 
-const metadata = JSON.parse(fs.readFileSync(path.join(__dirname, '../../_json_metadata/metadata.json'), 'utf8'));
 
 // /api/token/[id]?data=0xhasheddata
 const handler: VercelApiHandler = async (request, response) => {
@@ -28,6 +27,13 @@ const handler: VercelApiHandler = async (request, response) => {
 
     if (!pokemon) {
         response.status(404).send(`No pokemon found for hash ${data}`);
+        return;
+    }
+
+    // if tokenId not pokemon index, return 404
+    if (metadata[tokenId] !== pokemon) {
+        console.log('Token id not pokemon index', tokenId, pokemon, metadata[tokenId]);
+        response.status(404).send(`No pokemon found for token id ${tokenId}`);
         return;
     }
 

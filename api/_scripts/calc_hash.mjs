@@ -1,12 +1,17 @@
 import fs from 'fs';
 
 import { hashPokemon } from './hash_pokemon.mjs';
+import { shuffle } from './shuffle.mjs';
 
-const metadata = JSON.parse(fs.readFileSync('./_json_metadata/metadata.json', 'utf8'));
+const dataDir = process.argv[2] || './data';
+
+const _metadata = JSON.parse(fs.readFileSync(`${dataDir}/metadata.json`));
+
+const metadata = shuffle(_metadata, process.env.shuffle_seed);
 
 const hashed = metadata.map((pokemon, index) => {
-
     const hash = hashPokemon(pokemon);
+
     return {
         id: index,
         name: pokemon.name,
@@ -15,8 +20,6 @@ const hashed = metadata.map((pokemon, index) => {
     };
 })
 
-// write to hashed.json
-fs.writeFileSync('./_json_metadata/hashed.json', JSON.stringify(hashed, null, 2));
-
-
+// write the hashed data to a file
+fs.writeFileSync(`${dataDir}/_metadata.json`, JSON.stringify(hashed, null, 2));
 

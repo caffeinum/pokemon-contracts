@@ -63,8 +63,10 @@ module.exports = {
     polygon: {
       provider: () =>
         new HDWalletProvider({
+          // from profanity --contract --matching
           privateKeys: [
-            process.env.PRIVATE_KEY_VANITY, // from profanity --contract --matching
+            process.env.PRIVATE_KEY_VANITY,
+            // process.env.PRIVATE_KEY_VANITY2
           ],
           // mnemonic,
           providerOrUrl: `https://polygon-mainnet.infura.io/v3/${INFURA_KEY}`,

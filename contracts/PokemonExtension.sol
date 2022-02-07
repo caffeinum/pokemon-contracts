@@ -2,6 +2,8 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+// import "@openzeppelin/contracts/utils/IERC165.sol";
+import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
@@ -26,7 +28,7 @@ interface IMetaverseNFT is IERC721 {
     ) external payable;
 }
 
-contract PokemonExtension is Ownable, INFTURIExtension {
+contract PokemonExtension is Ownable, ERC165, INFTURIExtension {
     IMetaverseNFT public immutable nft;
 
     constructor(address _nft) {
@@ -172,4 +174,9 @@ contract PokemonExtension is Ownable, INFTURIExtension {
 
         // implicitly return (r, s, v)
     }
+
+    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
+        return interfaceId == type(INFTURIExtension).interfaceId || super.supportsInterface(interfaceId);
+    }
+
 }
